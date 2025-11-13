@@ -83,7 +83,15 @@ Route::post('/categories/store',[\App\Http\Controllers\CategoriesController::cla
 Route::get('/categories/{categories}/show',[\App\Http\Controllers\CategoriesController::class,'show']);
 Route::put('/categories/{categories}/update',[\App\Http\Controllers\CategoriesController::class,'update']);
 Route::delete('/categories/{categories}/delete',[\App\Http\Controllers\CategoriesController::class,'delete']);
-
+Route::prefix('userprofile')->group(function (){
+        Route::middleware('auth:sanctum')->group(function () {
+            Route::get('/', [\App\Http\Controllers\UserProfileController::class, 'index']);
+            Route::post('/store', [\App\Http\Controllers\UserProfileController::class, 'store']);
+            Route::get('/{userprofile}/show', [\App\Http\Controllers\UserProfileController::class, 'show']);
+            Route::put('/{userprofile}/update', [\App\Http\Controllers\UserProfileController::class, 'update']);
+            Route::delete('/{userprofile}/delete', [\App\Http\Controllers\UserProfileController::class, 'delete']);
+        });
+});
 Route::post('/bookingdb/store',[\App\Http\Controllers\BookingdbController::class,'store']);
 Route::get('/bookingdb/{bookingdb}/show',[\App\Http\Controllers\BookingdbController::class,'show']);
 Route::put('/bookingdb/{bookingdb}/update',[\App\Http\Controllers\BookingdbController::class,'update']);
@@ -91,16 +99,5 @@ Route::delete('/bookingdb/{bookingdb}/delete',[\App\Http\Controllers\BookingdbCo
 
 
 Route::get('userprofile/{userprofile}/token',[\App\Http\Controllers\UserProfileController::class,'createtoken']);
-Route::middleware('auth:sanctum')->group(function(){
-    Route::get('/userprofile',[\App\Http\Controllers\UserProfileController::class,'index']);
-    Route::post('/userprofile/store',[\App\Http\Controllers\UserProfileController::class,'store']);
-    Route::get('/userprofile/{userprofile}/show',[\App\Http\Controllers\UserProfileController::class,'show']);
-    Route::put('/userprofile/{userprofile}/update',[\App\Http\Controllers\UserProfileController::class,'update']);
-    Route::delete('/userprofile/{userprofile}/delete',[\App\Http\Controllers\UserProfileController::class,'delete']);
 
-    Route::post('/task/store',[\App\Http\Controllers\TaskController::class,'store']);
-    Route::get('/task/{task}/show',[\App\Http\Controllers\TaskController::class,'show']);
-    Route::put('/task/{task}/update',[\App\Http\Controllers\TaskController::class,'update']);
-    Route::delete('/task/{task}/delete',[\App\Http\Controllers\TaskController::class,'delete']);
 
-});

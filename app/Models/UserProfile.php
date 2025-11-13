@@ -13,6 +13,7 @@ class UserProfile extends Model
       "id",
       "Username",
         "email",
+        "image_url",
       "phonenumber",
       "	EditAdress",
       "setAsPrimeryAdd"

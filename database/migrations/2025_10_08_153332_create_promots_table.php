@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('promots', function (Blueprint $table) {
             $table->id();
             $table->string('code');
+            $table->string('imagep_url')->nullable();
             $table->string('OFF');
             $table->timestamps();
         });

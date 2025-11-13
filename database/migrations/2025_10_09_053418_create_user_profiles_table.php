@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('Username');
             $table->string('email');
             $table->string('phonenumber', 20);
+            $table->string('image_url')->nullable();
             $table->string('EditAdress',100)->nullable();
             $table->boolean('setAsPrimeryAdd')->default(false);
             $table->timestamps();

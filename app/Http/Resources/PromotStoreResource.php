@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class UserProfileStoreResource extends JsonResource
+class PromotStoreResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -15,10 +15,8 @@ class UserProfileStoreResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'id' => $this->id,
-            'Username'=>$this->Username,
-            'email'=>$this->email,
-            'image_url'=>env('APP_URL').$this->image_url
+            'id'=> $this -> id,
+            'imagep_url'=> env('APP_URL').$this->imagep_url
         ];
     }
 }

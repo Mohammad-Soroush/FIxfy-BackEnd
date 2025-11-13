@@ -11,6 +11,7 @@ use App\Http\Resources\UserProfileUpdateResourser;
 use App\Models\UserProfile;
 use Couchbase\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class UserProfileController extends Controller
 {
@@ -34,7 +35,9 @@ class UserProfileController extends Controller
         }
     public function store(UserProfileStoreValidation $userprofilestorevalidation)
     {
-        $UserProfile = UserProfile::create($userprofilestorevalidation -> all());
+        $UserProfile = UserProfile::create($userprofilestorevalidation -> except('image_url'));
+        $image_url = Storage::putFile('/userprofile',$userprofilestorevalidation->image_url);
+        $UserProfile->update(['image_url'=>$image_url]);
         return response()->json([
            'message'=>'create has been successfully',
             'data' => new UserProfileStoreResource($UserProfile)

@@ -8,8 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Promot extends Model
 {
     protected $fillable =[
-        'code',
-        'OFF'
+        "code",
+        "imagep_url",
+        "OFF"
     ];
     use HasFactory;
 }

@@ -2,17 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\PromotStoreResource;
 use App\Models\Promot;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PromotController extends Controller
 {
     public function store(Request $request)
     {
-        $Promot= Promot::create($request -> all());
+        $Promot= Promot::create($request -> except('imagep_url'));
+        $imagep_url = Storage::putFile('/promot', $request->imagep_url);
+        $Promot -> update(['imagep_url'=>$imagep_url]);
         return response()->json([
             'message'=>'create has been successfully',
-            'data' => $Promot
+            'data' => new PromotStoreResource($Promot)
         ]);
     }
 
